@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevNexus Logo com 5 Pilares</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ==================== BASE ==================== */
+body {
+  background: radial-gradient(circle at center, #020202 40%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+  color: #00ffee;
+  margin: 0;
+}
+
+/* ==================== VARIÁVEIS ==================== */
+:root {
+  --neon-blue: #00ccff;
+  --neon-green: #00ffaa;
+  --glow: #00ffbb;
+  --size: 280px;
+}
+
+/* ==================== CONTAINER ==================== */
+.logo-container {
+  position: relative;
+  width: var(--size);
+  height: calc(var(--size) * 1.15);
+  filter: drop-shadow(0 0 10px var(--glow));
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+.logo-container:hover {
+  transform: rotateY(5deg) rotateX(2deg);
+}
+
+/* ==================== HEXÁGONOS ==================== */
+.hex {
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
+
+.hex.outer {
+  background: linear-gradient(130deg, var(--neon-blue), var(--neon-green));
+  box-shadow: 0 0 25px var(--glow);
+  animation: gradientShift 5s infinite alternate;
+}
+
+.hex.inner {
+  width: 92%;
+  height: 92%;
+  position: absolute;
+  top: 93%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, #001010 0%, #000 80%);
+  border: 2px solid rgba(0, 255, 170, 0.3);
+  box-shadow: inset 0 0 20px rgba(0, 255, 180, 0.3);
+  overflow: hidden;
+}
+
+.hex.inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(0, 255, 200, 0.15), transparent 70%);
+  mix-blend-mode: overlay;
+  animation: lightSweep 6s linear infinite;
+}
+
+/* ==================== CIRCUITOS ==================== */
+.circuit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%) rotate(30deg);
+  border: 1px dashed rgba(0, 255, 170, 0.25);
+  animation: rotateCircuit 40s linear infinite;
+}
+
+.node {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--neon-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-green), 0 0 25px var(--neon-green);
+  animation: glowNode 2s infinite alternate;
+  z-index: 10;
+}
+.node.tl { top: 15%; left: 15%; }
+.node.tr { top: 15%; right: 15%; }
+.node.l  { top: 50%; left: 5%; transform: translateY(-50%); }
+.node.r  { top: 50%; right: 5%; transform: translateY(-50%); }
+.node.bl { bottom: 15%; left: 15%; }
+.node.br { bottom: 15%; right: 15%; }
+
+/* ==================== ÍCONES E TEXTO ==================== */
+.icon, .tech, .db {
+  position: absolute;
+  color: var(--glow);
+  text-shadow: 0 0 10px var(--glow), 0 0 20px var(--neon-blue);
+  animation: iconGlow 3s infinite alternate;
+  z-index: 10;
+  font-weight: 600;
+}
+
+/* JS (CENTRO) */
+.icon.js {
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--neon-black);
+  text-shadow: 0 0 25px var(--neon-blue), 0 0 50px var(--neon-green);
+}
+
+/* NODE.JS (TOPO) */
+.tech.node-top { 
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: var(--neon-green);
+  letter-spacing: 1px;
+}
+
+/* HTML (SUPERIOR ESQUERDO) */
+.icon.html { 
+  top: 25%;
+  left: 15%;
+  font-size: 28px;
+  color: var(--neon-blue);
+}
+
+/* CSS (SUPERIOR DIREITO) */
+.icon.css { 
+  top: 25%;
+  right: 15%;
+  font-size: 28px;
+  color: var(--neon-blue);
+}
+
+/* DATABASE (BASE) */
+.db {
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--neon-green);
+}
+.cylinder {
+  width: 38px;
+  height: 10px;
+  border-radius: 50% / 30%;
+  border: 2px solid currentColor;
+  margin-bottom: -5px;
+}
+.cylinder:nth-child(2) { opacity: 0.8; }
+.cylinder:nth-child(3) { opacity: 0.6; }
+
+.db-label {
+  margin-top: 10px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--neon-green);
+  font-weight: 600;
+}
+
+/* ==================== ANIMAÇÕES ==================== */
+@keyframes gradientShift {
+  0% { background: linear-gradient(120deg, var(--neon-blue), var(--neon-green)); }
+  100% { background: linear-gradient(120deg, var(--neon-green), var(--neon-blue)); }
+}
+@keyframes iconGlow {
+  0%, 100% { opacity: 1; text-shadow: 0 0 12px var(--glow), 0 0 20px var(--neon-blue); }
+  50% { opacity: 0.7; text-shadow: 0 0 4px var(--glow); }
+}
+@keyframes glowNode {
+  0%, 100% { box-shadow: 0 0 10px var(--neon-green), 0 0 30px var(--neon-green); }
+  50% { box-shadow: 0 0 3px var(--neon-green); }
+}
+@keyframes lightSweep {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 0.6; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+@keyframes rotateCircuit {
+  from { transform: translate(-50%, -50%) rotate(30deg); }
+  to { transform: translate(-50%, -50%) rotate(390deg); }
+}
+</style>
+</head>
+<body>
+
+<div class="logo-container">
+  <div class="hex outer"></div>
+  <div class="hex inner"></div>
+
+  <div class="circuit"></div>
+  <div class="node tl"></div>
+  <div class="node tr"></div>
+  <div class="node l"></div>
+  <div class="node r"></div>
+  <div class="node bl"></div>
+  <div class="node br"></div>
+
+  <div class="tech node-top">Node.js</div>
+  <div class="icon html">HTML</div>
+  <div class="icon css">CSS</div>
+  <div class="icon js">DevNexus</div>
+
+  <div class="db">
+    <div class="cylinder"></div>
+    <div class="cylinder"></div>
+    <div class="cylinder"></div>
+    <span class="db-label">DATABASE</span>
+  </div>
+</div>
+
+</body>
+</html>
