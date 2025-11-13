@@ -1,0 +1,34 @@
+# 🛑 Dependências e Builds
+# Diretórios que são gerados automaticamente e não devem ser versionados.
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# 🔑 Arquivos de Configuração Secreta
+# Variáveis de ambiente que contêm credenciais e chaves.
+.env
+
+# 📚 Logs e Debug
+# Arquivos de log gerados durante a execução ou depuração.
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 🖥️ Configurações do Editor e OS
+# Arquivos de sistema operacional ou configurações pessoais do IDE.
+.DS_Store
+.idea/
+.vscode/
+!.vscode/extensions.json
+
+# Arquivos de projeto .NET/VS (Removidos se não for um projeto híbrido)
+# *.suo
+# *.ntvs*
+# *.njsproj
+# *.sln
+# *.sw?

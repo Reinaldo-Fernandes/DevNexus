@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
+
+/* ======= RESET & VARIÁVEIS ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-bg: #0d1117; /* Fundo principal escuro (GitHub-like) */
+    --color-surface: #161b22; /* Superfícies (Navbar, Cartões) */
+    --color-text: #e6edf3; /* Cor principal do texto (claro) */
+    --color-accent: #3b82f6; /* Cor de acento primária (Azul forte) */
+    --color-accent-light: #60a5fa; /* Cor de acento secundária */
+    --color-muted: #8b949e; /* Cor para texto secundário/cinza */
+    --font-main: "EB Garamond", serif;
+    --radius: 12px;
+    --max-width: 1700px; /* Ajustado para caber até 5 cartões lado a lado */
+}
+
+/* ======= BASE ======= */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==== Navbar ==== */
+.navbar {
+    background-color: var(--color-surface);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar h1 {
+    font-size: 1.8rem;
+    color: white;
+}
+
+nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--color-accent);
+}
+
+/* ==== Main Content & Título ==== */
+main {
+    flex: 1; /* Empurra o footer para o final */
+}
+
+.empresa-container {
+    max-width: var(--max-width);
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.empresa-container h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--color-accent);
+}
+
+/* ======= Container de Cartões (Flexbox) ======= */
+.empresa-lista {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que os cartões quebrem a linha se necessário */
+    gap: 2rem;
+}
+
+/* Animação de entrada */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======= ESTILO UNIFICADO DOS CARTÕES DE EMPRESA ======= */
+.card-empresa {
+    /* Dimensões e espaçamento */
+    width: 300px;
+    padding: 20px;
+    
+    /* Adaptação ao Tema Dark */
+    background-color: var(--color-surface); 
+    color: var(--color-text);
+    
+    /* Sombra e Borda */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius);
+    text-align: center;
+    
+    /* Animação */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 0.8s forwards;
+}
+
+/* Aplicação dos delays na animação (expandido para 5 itens) */
+.card-empresa:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.card-empresa:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.card-empresa:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.card-empresa:nth-child(4) {
+    animation-delay: 0.8s;
+}
+.card-empresa:nth-child(5) {
+    animation-delay: 1.0s;
+}
+
+/* Efeito ao passar o mouse */
+.card-empresa:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Logo */
+.logo-container {
+    margin-bottom: 15px;
+}
+.logo {
+    width: 80px; 
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-accent); 
+}
+
+/* Título */
+.nome-empresa {
+    font-size: 1.5em;
+    color: var(--color-accent-light); 
+    margin: 10px 0;
+}
+
+/* Resumo */
+.resumo-empresa {
+    font-size: 0.95em;
+    color: var(--color-muted); 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Botão de detalhes/ação */
+.btn-detalhes {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    
+    /* Cor de acento */
+    background-color: var(--color-accent); 
+    color: white; 
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+/* Efeito hover do botão */
+.btn-detalhes:hover {
+    background-color: var(--color-accent-light); 
+}
+
+/* ======= FOOTER ======= */
+footer {
+    background: var(--color-surface);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #21262d;
+}
+
+.footer-links {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.footer-links a {
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--color-accent-light);
+}
