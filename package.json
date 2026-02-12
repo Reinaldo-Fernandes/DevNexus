@@ -1,0 +1,28 @@
+{
+  "name": "devnexus",
+  "version": "1.0.0",
+  "description": "Uma pagina para programadores poderem mostra o seu trabalho de forma limpa e clara!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/style/input.css -o ./src/style/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reinaldo-Fernandes/DevNexus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Reinaldo-Fernandes/DevNexus/issues"
+  },
+  "homepage": "https://github.com/Reinaldo-Fernandes/DevNexus#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6"
+  }
+}
