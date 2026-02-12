@@ -118,4 +118,14 @@ const TermsAcceptance = ({ onAccept }) => {
   );
 };
 
-//
+/*Parte Dev*/
+ // Imagens do Projetos.
+ // Link do Projeto 
+ // Descrição do Projeto
+ // Link do GitHub ou Repositório
+
+/*Empresa */
+// Anuncios das Vagas
+// Link para Candidatar-se
+// Descrição da Vaga
+// Requisitos da Vaga
