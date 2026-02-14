@@ -1,87 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DevNexus — Mostre seus projetos para o mundo</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=MonteCarlo&display=swap" rel="stylesheet">
-  <link rel="icon" href="/src/assets/dn.png" type="image/png">
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bg: '#0d1117',
-            surface: '#161b22',
-            card: '#1c2128',
-            border: '#30363d',
-            primary: '#3b82f6',
-            'primary-hover': '#60a5fa',
-            'text-main': '#e6edf3',
-            'text-muted': '#8b949e',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            logo: ['MonteCarlo', 'cursive'],
-          }
-        }
-      }
-    }
-  </script>
-
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .btn-primary {
-        @apply bg-primary hover:bg-primary-hover text-white px-7 py-3 rounded-md font-semibold transition-all hover:-translate-y-0.5 border border-primary text-center cursor-pointer;
-        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
-      }
-      .input-field {
-        @apply w-full p-3 bg-bg border border-border rounded-lg focus:ring-2 outline-none text-text-main transition-all;
-      }
-    }
-    /* Scrollbar custom para o modal */
-    .custom-scroll::-webkit-scrollbar { width: 6px; }
-    .custom-scroll::-webkit-scrollbar-track { background: #161b22; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #30363d; border-radius: 10px; }
-  </style>
+  <link rel="icon" href="/src/assets/dn.png">
 </head>
-
-<body class="bg-bg text-text-main font-sans leading-relaxed overflow-x-hidden">
-
-  <header class="navbar sticky top-0 z-[100] flex justify-between items-center bg-surface/80 backdrop-blur-md px-8 py-3 border-b border-border">
-    <div class="flex items-center gap-3 font-logo text-2xl cursor-pointer">
-      <img src="/src/assets/dn.png" alt="Logo DevNexus" class="w-8 h-8 drop-shadow-[0_0_5px_rgba(59,130,246,0.5)]">
-      <h1 class="text-white">DevNexus</h1>
-    </div>
-
-    <nav class="hidden md:flex gap-8 items-center">
-      <a href="public/sobre.html" class="text-sm font-medium text-text-muted hover:text-primary-hover transition-all">Sobre</a>
-      <a href="public/projetos.html" class="text-sm font-medium text-text-muted hover:text-primary-hover transition-all">Projetos</a>
-      <a href="public/vagas.html" class="text-sm font-medium text-text-muted hover:text-primary-hover transition-all">Vagas</a>
-      <button onclick="toggleAuthModal()" class="text-sm font-bold text-primary hover:text-primary-hover transition-all">Cadastro</button>
-    </nav>
-
-    <button class="md:hidden text-2xl" id="menu-toggle">☰</button>
-  </header>
-
-  <section class="max-w-[1100px] mx-auto pt-24 pb-20 px-8 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
-    <div class="max-w-[540px]">
-      <h2 class="text-5xl md:text-6xl font-bold leading-tight text-white mb-6">Aréa do Dev</h2>
-      <p class="text-lg text-text-muted mb-8">Mostre seus projetos para o mundo e conecte-se com oportunidades incríveis.</p>
-      <!-- Area de adição dos Projetos-->
-      <button onclick="toggleProjectModal()" class="btn-primary">Adicionar Projeto</button>
-    </div>  
-    design de cards para os projetos
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-      <!-- Exemplo de card de projeto -->
-      <div class="bg-card rounded-lg shadow-md p-6 flex flex-col">
-        <h3 class="text-xl font-semibold mb-2">Projeto Exemplo</h3>
-        <p class="text-text-muted mb-4 flex-grow">Descrição breve do projeto, destacando suas principais características e tecnologias utilizadas.</p>
-        <a href="#" class="text-primary hover:text-primary-hover transition-all mt-auto">Ver Detalhes</a>
-      </div>
-      <!-- Fim do exemplo de card -->
-  <footer class="py-12 px-8 text-center">
-    <p class="text-sm text-text-muted italic">© 2026 DevNexus — A ponte entre o talento e o mercado.</p>
-  </footer>
+<body>
+   <div id="root"></div>]
+   <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
