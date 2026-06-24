@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap');
+/* ======= RESET & VARIÁVEIS ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-accent: #3b82f6;
+  --color-accent-light: #60a5fa;
+  --color-muted: #8b949e;
+  --font-main: 'Inter', Arial, sans-serif;
+  --radius: 12px;
+  --max-width: 1100px;
+}
+
+/* ======= BASE ======= */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--color-accent-light);
+}
+
+/* ======= NAVBAR ======= */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-surface);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #21262d;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  --color-text: #e6edf3;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "MonteCarlo", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--color-text);
+}
+
+.logo img {
+  width: 35px;
+  height: 35px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+/* ========= Hero Section ========= */
+.job-card{
+    width:350px;
+    background:#fff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.job-card:hover{
+    transform:translateY(-5px);
+}
+
+.job-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:start;
+}
+
+.company{
+    color:#666;
+    font-size:.9rem;
+}
+
+.badge{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:.8rem;
+    font-weight:bold;
+}
+
+.remote{
+    background:#d1fae5;
+    color:#065f46;
+}
+
+.description{
+    margin:15px 0;
+    color:#555;
+}
+
+.job-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    font-size:.9rem;
+}
+
+.apply-btn{
+    width:100%;
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.apply-btn:hover{
+    background:#1d4ed8;
+}
