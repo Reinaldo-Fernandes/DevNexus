@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';" />
+  <title>Cadastro · DevConnect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=MonteCarlo&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="/src/style/cadastro.css">
+</head>
+<body class="mode-empresa">
+
+<div class="mode-transition" id="modeOverlay"></div>
+
+<header class="navbar">
+  <a href="index.html" class="navbar-logo">
+    Dev<span>Connect</span>
+  </a>
+  <nav class="nav-links" id="navLinks">
+    <a href="/index.html">Início</a>
+    <a href="/src/components/vagas.html">Vagas</a>
+    <a href="/src/components/empresa.html">Empresas</a>
+    <a href="/src/components/login.html" class="nav-cta">Entrar</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleNav()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</header>
+
+<div class="page-body">
+
+<aside class="side">
+  <div class="side-glow glow-top"></div>
+  <div class="side-glow glow-bot"></div>
+
+  <div class="side-logo">Dev<span>Connect</span></div>
+
+  <div class="side-body">
+    <h2 id="sideTitle">Conecte sua empresa aos melhores devs</h2>
+    <p id="sideDesc">Cadastre sua empresa e encontre desenvolvedores verificados para seus projetos em minutos.</p>
+  </div>
+
+  <div class="side-features" id="sideFeatures">
+    </div>
+
+  <div class="terminal-bg" aria-hidden="true">
+    <span style="color:#1E3A2E">// DevConnect SDK</span><br/>
+    <span style="color:#1E2A4A">const</span> dev = <span style="color:#1E2A4A">await</span> <span style="color:#1A3250">DevConnect</span>.register({<br/>
+    &nbsp;&nbsp;name: <span style="color:#183328">"você"</span>,<br/>
+    &nbsp;&nbsp;skills: [<span style="color:#183328">"React"</span>, <span style="color:#183328">"Node"</span>],<br/>
+    &nbsp;&nbsp;open: <span style="color:#1E2A4A">true</span><br/>
+    });<br/>
+    <span style="color:#1E3A2E">// ✓ perfil verificado</span>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="card">
+
+    <div class="toggle-wrap" role="group" aria-label="Tipo de cadastro">
+      <div class="toggle-pill" id="togglePill"></div>
+      <button class="toggle-btn active" id="btnEmpresa" onclick="setMode('empresa')" aria-pressed="true">
+        🏢 Empresa
+      </button>
+      <button class="toggle-btn" id="btnDev" onclick="setMode('dev')" aria-pressed="false">
+        👾 Desenvolvedor
+      </button>
+    </div>
+
+    <div class="card-header">
+      <h1 id="cardTitle">Cadastro de Empresa</h1>
+      <p>Já tem conta? <a href="login.html">Entrar</a></p>
+    </div>
+
+    <div class="progress-wrap" id="progressBar">
+      <div class="progress-step active" id="ps1"></div>
+      <div class="progress-step" id="ps2"></div>
+      <div class="progress-step" id="ps3"></div>
+    </div>
+
+    <div class="form-panel active" id="panelEmpresa">
+
+      <div class="fstep active" id="e-step1">
+        <div class="step-label"><span>Etapa 1</span> de 3 — Dados da Empresa</div>
+
+        <div class="field">
+          <label>Razão Social <span class="req">*</span></label>
+          <input type="text" id="e-razao" autocomplete="organization" maxlength="100" placeholder="Acme Tecnologia Ltda" />
+          <div class="field-msg error" id="err-e-razao" style="display:none">⚠ Campo obrigatório</div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>CNPJ <span class="req">*</span></label>
+            <input type="text" id="e-cnpj" maxlength="18" inputmode="numeric" placeholder="00.000.000/0000-00" />
+            <div class="inline-badge" id="cnpjBadge">✓ CNPJ válido</div>
+            <div class="field-msg error" id="err-e-cnpj" style="display:none">⚠ CNPJ inválido</div>
+          </div>
+          <div class="field">
+            <label>Segmento <span class="req">*</span></label>
+            <select id="e-seg">
+              <option value="">Selecione…</option>
+              <option>Tecnologia</option><option>Financeiro</option>
+              <option>Saúde</option><option>Varejo</option>
+              <option>Educação</option><option>Outros</option>
+            </select>
+            <div class="field-msg error" id="err-e-seg" style="display:none">⚠ Selecione um segmento</div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>Telefone <span class="req">*</span></label>
+            <input type="tel" id="e-tel" maxlength="15" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" />
+            <div class="field-msg error" id="err-e-tel" style="display:none">⚠ Telefone inválido</div>
+          </div>
+          <div class="field">
+            <label>Tamanho da empresa</label>
+            <select id="e-tam">
+              <option value="">Selecione…</option>
+              <option>1–10 funcionários</option><option>11–50 funcionários</option>
+              <option>51–200 funcionários</option><option>201+ funcionários</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Site institucional</label>
+          <input type="url" id="e-site" autocomplete="url" placeholder="https://suaempresa.com.br" />
+          <div class="field-msg error" id="err-e-site" style="display:none">⚠ URL inválida</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="eGoStep(2)">Próximo →</button>
+        </div>
+      </div>
+
+      <div class="fstep" id="e-step2">
+        <div class="step-label"><span>Etapa 2</span> de 3 — Conta de Acesso</div>
+
+        <div class="row2">
+          <div class="field">
+            <label>Nome do responsável <span class="req">*</span></label>
+            <input type="text" id="e-nome" autocomplete="name" maxlength="80" placeholder="Maria Silva" />
+            <div class="field-msg error" id="err-e-nome" style="display:none">⚠ Informe o nome</div>
+          </div>
+          <div class="field">
+            <label>Cargo</label>
+            <input type="text" id="e-cargo" maxlength="60" placeholder="CTO, CEO, RH…" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>E-mail corporativo <span class="req">*</span></label>
+          <input type="email" id="e-email" autocomplete="email" maxlength="120" placeholder="maria@suaempresa.com.br" />
+          <div class="field-msg error" id="err-e-email" style="display:none">⚠ E-mail inválido</div>
+        </div>
+
+        <div class="field">
+          <label>Senha <span class="req">*</span></label>
+          <div class="pass-wrap">
+            <input type="password" id="e-senha" autocomplete="new-password" maxlength="128" placeholder="Mínimo 12 caracteres" />
+            <button class="pass-toggle" type="button" onclick="togglePass('e-senha',this)">👁</button>
+          </div>
+          <div class="strength-bar"><div class="strength-seg" id="e-sb1"></div><div class="strength-seg" id="e-sb2"></div><div class="strength-seg" id="e-sb3"></div><div class="strength-seg" id="e-sb4"></div></div>
+          <div class="strength-label" id="e-sLabel">Digite a senha</div>
+          <div class="field-msg error" id="err-e-senha" style="display:none">⚠ Mín. 12 chars, maiúscula, número e símbolo</div>
+        </div>
+
+        <div class="field">
+          <label>Confirmar senha <span class="req">*</span></label>
+          <div class="pass-wrap">
+            <input type="password" id="e-conf" autocomplete="new-password" maxlength="128" placeholder="Repita a senha" />
+            <button class="pass-toggle" type="button" onclick="togglePass('e-conf',this)">👁</button>
+          </div>
+          <div class="field-msg error" id="err-e-conf" style="display:none">⚠ As senhas não coincidem</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="eGoStep(1)">← Voltar</button>
+          <button class="btn btn-primary" onclick="eGoStep(3)">Próximo →</button>
+        </div>
+      </div>
+
+      <div class="fstep" id="e-step3">
+        <div class="step-label"><span>Etapa 3</span> de 3 — Segurança & Confirmação</div>
+
+        <div class="notice">🔒 Dados transmitidos com TLS 1.3 e armazenados com AES-256.</div>
+
+        <div class="field">
+          <label>Pergunta de segurança <span class="req">*</span></label>
+          <select id="e-perg">
+            <option value="">Selecione…</option>
+            <option>Qual o nome do seu primeiro animal de estimação?</option>
+            <option>Qual a cidade onde seus pais se conheceram?</option>
+            <option>Qual o modelo do seu primeiro carro?</option>
+            <option>Qual o nome do seu professor favorito?</option>
+          </select>
+          <div class="field-msg error" id="err-e-perg" style="display:none">⚠ Selecione uma pergunta</div>
+        </div>
+
+        <div class="field">
+          <label>Resposta <span class="req">*</span></label>
+          <input type="text" id="e-resp" maxlength="80" placeholder="Resposta" autocomplete="off" />
+          <div class="field-msg error" id="err-e-resp" style="display:none">⚠ Informe a resposta</div>
+        </div>
+
+        <div>
+          <div class="check-row"><input type="checkbox" id="e-termos" /><label for="e-termos">Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a> (LGPD)</label></div>
+          <div class="check-row"><input type="checkbox" id="e-2fa" /><label for="e-2fa">Ativar autenticação em dois fatores (2FA) por e-mail</label></div>
+          <div class="check-row"><input type="checkbox" id="e-news" /><label for="e-news">Receber novidades da plataforma</label></div>
+        </div>
+        <div class="field-msg error" id="err-e-termos" style="display:none">⚠ Aceite os termos para continuar</div>
+
+        <div style="display:none" aria-hidden="true"><input type="text" id="e-bot" name="website" tabindex="-1" autocomplete="off" /></div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="eGoStep(2)">← Voltar</button>
+          <button class="btn btn-primary" id="eBtnSubmit" onclick="eSubmit()">Criar conta</button>
+        </div>
+      </div>
+
+      <div class="fstep" id="e-success">
+        <div class="success-screen">
+          <div class="success-icon">✅</div>
+          <h2>Empresa cadastrada!</h2>
+          <p>Enviamos um link de confirmação para seu e-mail.<br>Verifique sua caixa de entrada para ativar a conta.</p>
+        </div>
+      </div>
+
+    </div><div class="form-panel" id="panelDev">
+
+      <div class="fstep active" id="d-step1">
+        <div class="step-label"><span>Etapa 1</span> de 3 — Perfil Público</div>
+
+        <button class="btn-gh" type="button" onclick="alert('OAuth GitHub: redireciona para github.com/login/oauth em produção')">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Entrar com GitHub
+        </button>
+        <div class="divider">ou preencha manualmente</div>
+
+        <div class="avatar-area">
+          <div class="avatar-preview" id="d-avatarPreview">👤</div>
+          <div>
+            <button class="avatar-btn" type="button" onclick="document.getElementById('d-avatarInput').click()">Carregar foto</button>
+            <input type="file" id="d-avatarInput" accept="image/png,image/jpeg,image/webp" style="display:none" onchange="previewAvatar(this)" />
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">PNG/JPEG/WEBP · máx 2 MB</div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>Nome completo <span class="req">*</span></label>
+            <input type="text" id="d-nome" autocomplete="name" maxlength="80" placeholder="João Pereira" />
+            <div class="field-msg error" id="err-d-nome" style="display:none">⚠ Informe seu nome</div>
+          </div>
+          <div class="field">
+            <label>Username <span class="req">*</span></label>
+            <input type="text" id="d-user" maxlength="30" placeholder="joao_dev" autocomplete="username" oninput="checkUsername(this)" />
+            <div class="field-msg error" id="err-d-user" style="display:none">⚠ 3–30 chars, letras/números/_</div>
+            <div class="field-msg ok"    id="ok-d-user"  style="display:none">✓ Disponível</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Headline <span class="req">*</span></label>
+          <input type="text" id="d-headline" maxlength="100" placeholder="Full-Stack Developer · React · Node · AWS" />
+          <div class="field-msg error" id="err-d-headline" style="display:none">⚠ Informe um headline</div>
+        </div>
+
+        <div class="field">
+          <label>Nível de senioridade <span class="req">*</span></label>
+          <div class="radio-grid">
+            <label class="radio-card"><input type="radio" name="seniority" value="junior" /><div class="lvl">🌱</div><div class="lvl-name">Junior</div><div class="lvl-yrs">0–2 anos</div></label>
+            <label class="radio-card"><input type="radio" name="seniority" value="pleno" /><div class="lvl">⚡</div><div class="lvl-name">Pleno</div><div class="lvl-yrs">2–5 anos</div></label>
+            <label class="radio-card"><input type="radio" name="seniority" value="senior" /><div class="lvl">🔥</div><div class="lvl-name">Sênior</div><div class="lvl-yrs">5+ anos</div></label>
+          </div>
+          <div class="field-msg error" id="err-d-sen" style="display:none">⚠ Selecione seu nível</div>
+        </div>
+
+        <div class="field">
+          <label>Stacks / Tecnologias <span class="req">*</span></label>
+          <div class="tags-wrap" id="tagsWrap" onclick="document.getElementById('tagInput').focus()">
+            <input class="tag-input" id="tagInput" placeholder="Ex.: React, Node…" onkeydown="tagKeydown(event)" maxlength="30" autocomplete="off" spellcheck="false" />
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Enter ou vírgula para adicionar</div>
+          <div class="field-msg error" id="err-d-tags" style="display:none">⚠ Adicione ao menos uma tecnologia</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="dGoStep(2)">Próximo →</button>
+        </div>
+      </div>
+
+      <div class="fstep" id="d-step2">
+        <div class="step-label"><span>Etapa 2</span> de 3 — Conta</div>
+
+        <div class="field">
+          <label>E-mail <span class="req">*</span></label>
+          <input type="email" id="d-email" autocomplete="email" maxlength="120" placeholder="joao@email.com" />
+          <div class="field-msg error" id="err-d-email" style="display:none">⚠ E-mail inválido</div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label>GitHub</label>
+            <input type="url" id="d-github" placeholder="https://github.com/usuario" oninput="checkGitHub(this)" />
+            <div class="inline-badge" id="ghBadge">✓ URL GitHub válida</div>
+          </div>
+          <div class="field">
+            <label>LinkedIn</label>
+            <input type="url" id="d-linkedin" placeholder="https://linkedin.com/in/…" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Disponibilidade</label>
+          <select id="d-disp">
+            <option value="">Selecione…</option>
+            <option>Aberto a oportunidades</option>
+            <option>Freelance / projetos</option>
+            <option>Apenas consultas</option>
+            <option>Não disponível no momento</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Pretensão salarial (R$/mês)</label>
+          <input type="number" id="d-sal" min="0" max="99999" placeholder="Ex.: 8000" inputmode="numeric" />
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Visível apenas para empresas verificadas</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="dGoStep(1)">← Voltar</button>
+          <button class="btn btn-primary" onclick="dGoStep(3)">Próximo →</button>
+        </div>
+      </div>
+
+      <div class="fstep" id="d-step3">
+        <div class="step-label"><span>Etapa 3</span> de 3 — Segurança</div>
+
+        <div class="notice">🔐 Senha armazenada com bcrypt (custo 12). Nunca enviamos sua senha por e-mail.</div>
+
+        <div class="field">
+          <label>Senha <span class="req">*</span></label>
+          <div class="pass-wrap">
+            <input type="password" id="d-senha" autocomplete="new-password" maxlength="128" placeholder="Mínimo 12 caracteres" />
+            <button class="pass-toggle" type="button" onclick="togglePass('d-senha',this)">👁</button>
+          </div>
+          <div class="strength-bar"><div class="strength-seg" id="d-sb1"></div><div class="strength-seg" id="d-sb2"></div><div class="strength-seg" id="d-sb3"></div><div class="strength-seg" id="d-sb4"></div></div>
+          <div class="strength-label" id="d-sLabel">Digite a senha</div>
+          <div class="field-msg error" id="err-d-senha" style="display:none">⚠ Mín. 12 chars, maiúscula, número e símbolo</div>
+        </div>
+
+        <div class="field">
+          <label>Confirmar senha <span class="req">*</span></label>
+          <div class="pass-wrap">
+            <input type="password" id="d-conf" autocomplete="new-password" maxlength="128" placeholder="Repita a senha" />
+            <button class="pass-toggle" type="button" onclick="togglePass('d-conf',this)">👁</button>
+          </div>
+          <div class="field-msg error" id="err-d-conf" style="display:none">⚠ As senhas não coincidem</div>
+        </div>
+
+        <div>
+          <div class="check-row"><input type="checkbox" id="d-2fa" /><label for="d-2fa">Ativar 2FA por app autenticador (TOTP — recomendado)</label></div>
+          <div class="check-row"><input type="checkbox" id="d-alerts" /><label for="d-alerts">Alertas de novo acesso por e-mail</label></div>
+          <div class="check-row"><input type="checkbox" id="d-termos" /><label for="d-termos">Li e aceito os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a></label></div>
+        </div>
+        <div class="field-msg error" id="err-d-termos" style="display:none">⚠ Aceite os termos para continuar</div>
+
+        <div style="display:none" aria-hidden="true"><input type="text" id="d-bot" name="website" tabindex="-1" autocomplete="off" /></div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="dGoStep(2)">← Voltar</button>
+          <button class="btn btn-primary" id="dBtnSubmit" onclick="dSubmit()">Criar conta</button>
+        </div>
+      </div>
+
+      <div class="fstep" id="d-success">
+        <div class="success-screen">
+          <div class="success-icon">🚀</div>
+          <h2>Perfil criado!</h2>
+          <p>Confirmação enviada para seu e-mail. Após verificar, seu perfil ficará público:</p>
+          <div class="profile-url" id="d-profileUrl"></div>
+        </div>
+      </div>
+
+    </div></div></main>
+
+</div><footer class="page-footer">
+  <div class="footer-brand">Dev<span>Connect</span></div>
+  <div class="footer-links">
+    <a href="#">Termos de Uso</a>
+    <a href="#">Privacidade</a>
+    <a href="#">LGPD</a>
+    <a href="#">Suporte</a>
+  </div>
+  <div class="footer-copy">© 2025 DevConnect. Todos os direitos reservados.</div>
+</footer>
+
+<script src="/src/js/cadastro.js"></script>
+</body>
+</html>
