@@ -19,12 +19,32 @@
 }
 
 /* ======= BASE ======= */
+html, body {
+  min-height: 100%;
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-main);
   line-height: 1.6;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Qualquer seção de conteúdo principal empurra o footer para baixo */
+.hero,
+.features,
+.cta,
+.sobre-hero {
+  flex-shrink: 0;
+}
+
+main,
+.sobre-hero {
+  flex: 1;
 }
 
 a {
@@ -236,6 +256,84 @@ header.navbar {
 .cta p {
   color: var(--color-muted);
   margin-bottom: 2rem;
+}
+
+/* ======= SOBRE (estilo carta, centralizado) ======= */
+.sobre-hero {
+  padding: 4rem 2rem 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.sobre-container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sobre-container h2 {
+  font-size: 2.3rem;
+  color: var(--color-accent-light);
+  margin-bottom: 1rem;
+}
+
+.sobre-container h3 {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  margin: 2.5rem 0 1.5rem;
+}
+
+.sobre-lead {
+  font-size: 1.25rem;
+  color: var(--color-text);
+  margin: 0 auto 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  max-width: 600px;
+}
+
+.sobre-container p {
+  color: var(--color-muted);
+  margin: 0 auto 1.2rem;
+  max-width: 600px;
+}
+
+.sobre-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.sobre-card {
+  background: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid #21262d;
+  transition: transform 0.2s ease;
+}
+
+.sobre-card:hover {
+  transform: translateY(-4px);
+}
+
+.sobre-card h4 {
+  margin-bottom: 0.6rem;
+  color: var(--color-text);
+}
+
+.sobre-card p {
+  margin-bottom: 0;
+  max-width: none;
+}
+
+.sobre-cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* ======= FOOTER ======= */
