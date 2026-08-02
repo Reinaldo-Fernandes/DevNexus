@@ -21,6 +21,49 @@ const showErr = (id, v) => { $(id).style.display = v ? 'flex' : 'none'; };
 const sanitize = v => v.replace(/<[^>]*>/g,'').trim();
 
 /* ──────────────────────────────────────
+   ARMAZENAMENTO (localStorage)
+   Chaves usadas em todo o site:
+   - devnexus_perfis  → lista com todos os perfis (empresa + dev)
+   - devnexus_sessao  → objeto único: quem está logado agora
+────────────────────────────────────── */
+const DB_PERFIS  = 'devnexus_perfis';
+const DB_SESSAO  = 'devnexus_sessao';
+
+function gerarId() {
+  return (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2));
+}
+
+function getPerfis() {
+  try {
+    return JSON.parse(localStorage.getItem(DB_PERFIS)) || [];
+  } catch (e) {
+    console.error('Não foi possível ler os perfis salvos:', e);
+    return [];
+  }
+}
+
+function salvarPerfil(perfil) {
+  const perfis = getPerfis();
+  perfis.push(perfil);
+  try {
+    localStorage.setItem(DB_PERFIS, JSON.stringify(perfis));
+    return true;
+  } catch (e) {
+    console.error('Não foi possível salvar o perfil:', e);
+    return false;
+  }
+}
+
+function iniciarSessao(perfil) {
+  const sessao = { id: perfil.id, tipo: perfil.tipo, nome: perfil.nome };
+  try {
+    localStorage.setItem(DB_SESSAO, JSON.stringify(sessao));
+  } catch (e) {
+    console.error('Não foi possível iniciar a sessão:', e);
+  }
+}
+
+/* ──────────────────────────────────────
    MODE TOGGLE
 ────────────────────────────────────── */
 const MODES = {
@@ -175,7 +218,28 @@ function eSubmit() {
   if($('e-bot').value) return;
   const btn = $('eBtnSubmit');
   btn.disabled = true; btn.textContent = 'Criando conta…';
+
+  const perfil = {
+    id: gerarId(),
+    tipo: 'empresa',
+    nome: sanitize($('e-razao').value),
+    cnpj: $('e-cnpj').value,
+    segmento: $('e-seg').value,
+    telefone: $('e-tel').value,
+    site: sanitize($('e-site').value),
+    responsavel: sanitize($('e-nome').value),
+    email: $('e-email').value,
+    criadoEm: new Date().toISOString()
+  };
+
   setTimeout(() => {
+    const ok = salvarPerfil(perfil);
+    if (!ok) {
+      alert('Não foi possível salvar o cadastro. Tente novamente.');
+      btn.disabled = false; btn.textContent = 'Criar conta';
+      return;
+    }
+    iniciarSessao(perfil);
     $('e-step3').classList.remove('active');
     $('e-success').classList.add('active');
     $('progressBar').style.opacity = '0';
@@ -273,7 +337,29 @@ function dSubmit() {
   const btn = $('dBtnSubmit');
   btn.disabled = true; btn.textContent = 'Criando perfil…';
   const username = sanitize($('d-user').value).toLowerCase();
+
+  const seniorEl = document.querySelector('input[name="seniority"]:checked');
+
+  const perfil = {
+    id: gerarId(),
+    tipo: 'dev',
+    nome: sanitize($('d-nome').value),
+    username: username,
+    headline: sanitize($('d-headline').value),
+    senioridade: seniorEl ? seniorEl.value : '',
+    stacks: tags.slice(),
+    email: $('d-email').value,
+    criadoEm: new Date().toISOString()
+  };
+
   setTimeout(() => {
+    const ok = salvarPerfil(perfil);
+    if (!ok) {
+      alert('Não foi possível salvar o cadastro. Tente novamente.');
+      btn.disabled = false; btn.textContent = 'Criar perfil';
+      return;
+    }
+    iniciarSessao(perfil);
     $('d-step3').classList.remove('active');
     $('d-success').classList.add('active');
     $('progressBar').style.opacity = '0';

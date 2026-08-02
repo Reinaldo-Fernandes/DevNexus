@@ -36,5 +36,3 @@ Isso muda bastante a estratégia:
 - **Empresa de tecnologia** (parceiro pagante early) → quer ver que o fluxo de candidatura/feedback realmente funciona e economiza tempo do RH deles
 
 Quer que eu monte o pitch deck (posso criar em PowerPoint) ou o resumo executivo de uma página com a ideia já estruturada nesses termos? Também posso ajudar a esboçar o backend mínimo necessário, se você quiser seguir por aí primeiro.
-
-
