@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="empresa.css">
+    <link rel="stylesheet" href="../style/empresa.css">
     <title>Empresas | DevNexus</title>
 </head>
 <body>
@@ -16,29 +16,75 @@
                 <a href="projetos.html">Projetos</a>
                 <a href="vagas.html">Vagas</a>
                 <a href="cadastro.html">Cadastro</a>
+                <a href="login.html">Entrar</a>
                 <a href="perfil.html" class="perfil-link">Perfil</a>
             </nav>
         </div>
     </header>
 
     <main class="empresa-container">
+
+        <!-- Painel de publicar vaga: só aparece pra quem está logado como empresa -->
+        <section id="painel-vaga" class="painel-vaga" style="display:none;">
+            <h2 id="titulo-form-vaga">Publicar uma vaga</h2>
+            <form id="form-vaga">
+                <input type="hidden" id="v-editando-id" value="">
+
+                <label for="v-titulo">Título da vaga</label>
+                <input type="text" id="v-titulo" placeholder="Ex: Desenvolvedor Front-End" required>
+
+                <label for="v-descricao">Descrição</label>
+                <textarea id="v-descricao" rows="3" placeholder="Descreva a vaga, requisitos e responsabilidades" required></textarea>
+
+                <label for="v-local">Localização</label>
+                <input type="text" id="v-local" placeholder="Ex: Natal/RN">
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="v-remoto">
+                    Vaga remota
+                </label>
+
+                <div class="salario-row">
+                    <div>
+                        <label for="v-salario-min">Salário mínimo (R$)</label>
+                        <input type="number" id="v-salario-min" min="0" placeholder="4500">
+                    </div>
+                    <div>
+                        <label for="v-salario-max">Salário máximo (R$)</label>
+                        <input type="number" id="v-salario-max" min="0" placeholder="6000">
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-salvar-vaga" class="btn-detalhes">Publicar vaga</button>
+                <button type="button" id="btn-cancelar-edicao-vaga" class="btn-secondary" style="display:none;">Cancelar edição</button>
+            </form>
+
+            <h3>Minhas vagas publicadas</h3>
+            <ul id="minhas-vagas" class="minhas-vagas"></ul>
+        </section>
+
+        <!-- Chamada pra quem não está logado como empresa -->
+        <section id="cta-login" class="cta-login">
+            <p>Quer publicar uma vaga? <a href="cadastro.html">Cadastre sua empresa</a> ou faça login.</p>
+        </section>
+
         <h2>Veja mais sobre quem está contratando</h2>
 
         <section class="empresa-lista">
             <div class="card-empresa">
                 <div class="logo-container">
-                    <img src="logo-empresa-a.png" alt="Logo TechVision" class="logo">
+                    <img src="logo-empresa-a.png" alt="Logo TechVision" class="logo" onerror="this.style.display='none'">
                 </div>
                 <h2 class="nome-empresa">TechVision Solutions</h2>
                 <p class="resumo-empresa">
-                    Líderes em **inovação tecnológica** no setor de software B2B. Nossa missão é transformar o mercado digitalmente com soluções escaláveis.
+                    Líderes em <strong>inovação tecnológica</strong> no setor de software B2B. Nossa missão é transformar o mercado digitalmente com soluções escaláveis.
                 </p>
                 <a href="#" class="btn-detalhes">Ver Oportunidades</a>
             </div>
 
             <div class="card-empresa">
                 <div class="logo-container">
-                    <img src="logo-empresa-b.png" alt="Logo Global Finance" class="logo">
+                    <img src="logo-empresa-b.png" alt="Logo Global Finance" class="logo" onerror="this.style.display='none'">
                 </div>
                 <h2 class="nome-empresa">Global Finance Dev</h2>
                 <p class="resumo-empresa">
@@ -46,10 +92,10 @@
                 </p>
                 <a href="#" class="btn-detalhes">Ver Oportunidades</a>
             </div>
-            
+
             <div class="card-empresa">
                 <div class="logo-container">
-                    <img src="logo-empresa-c.png" alt="Logo GreenCode" class="logo">
+                    <img src="logo-empresa-c.png" alt="Logo GreenCode" class="logo" onerror="this.style.display='none'">
                 </div>
                 <h2 class="nome-empresa">Startup GreenCode</h2>
                 <p class="resumo-empresa">
@@ -57,10 +103,10 @@
                 </p>
                 <a href="#" class="btn-detalhes">Ver Oportunidades</a>
             </div>
-            
+
             <div class="card-empresa">
                 <div class="logo-container">
-                    <img src="logo-empresa-d.png" alt="Logo Data Hub" class="logo">
+                    <img src="logo-empresa-d.png" alt="Logo Data Hub" class="logo" onerror="this.style.display='none'">
                 </div>
                 <h2 class="nome-empresa">Data Analytics Hub</h2>
                 <p class="resumo-empresa">
@@ -68,10 +114,10 @@
                 </p>
                 <a href="#" class="btn-detalhes">Ver Oportunidades</a>
             </div>
-            
+
             <div class="card-empresa">
                 <div class="logo-container">
-                    <img src="logo-empresa-e.png" alt="Logo UX/UI Studio" class="logo">
+                    <img src="logo-empresa-e.png" alt="Logo UX/UI Studio" class="logo" onerror="this.style.display='none'">
                 </div>
                 <h2 class="nome-empresa">UX/UI Dream Studio</h2>
                 <p class="resumo-empresa">
@@ -79,7 +125,7 @@
                 </p>
                 <a href="#" class="btn-detalhes">Ver Oportunidades</a>
             </div>
-            
+
         </section>
     </main>
 
@@ -91,5 +137,8 @@
             <a href="contato.html">Contato</a>
         </div>
     </footer>
+
+    <script src="../js/db.js"></script>
+    <script src="../js/empresa.js"></script>
 </body>
 </html>

@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ======= RESET & VARIÁVEIS (mesmos tokens do resto do site) ======= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-text: #e6edf3;
+  --color-accent: #3b82f6;
+  --color-accent-light: #60a5fa;
+  --color-muted: #9aa4b2;
+  --font-main: 'Inter', Arial, sans-serif;
+  --radius: 12px;
+  --max-width: 1100px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  line-height: 1.6;
+}
+
+a { text-decoration: none; color: var(--color-accent); transition: color 0.2s ease; }
+a:hover { color: var(--color-accent-light); }
+
+/* ======= NAVBAR ======= */
+header {
+  background: var(--color-surface);
+  border-bottom: 1px solid #21262d;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+header .navbar h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+header nav a {
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+header nav a:hover { color: var(--color-accent-light); }
+header nav a.perfil-link { color: var(--color-accent-light); }
+
+/* ======= CONTAINER PRINCIPAL ======= */
+.empresa-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.empresa-container > h2 {
+  font-size: 1.6rem;
+  margin: 2rem 0 1.5rem;
+  color: var(--color-accent-light);
+}
+
+/* ======= PAINEL DE PUBLICAR VAGA / CTA LOGIN ======= */
+.painel-vaga,
+.cta-login {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  background: var(--color-surface);
+  border: 1px solid #21262d;
+  border-radius: var(--radius);
+  padding: 1.8rem;
+}
+
+.painel-vaga h2 { margin-bottom: 0.3rem; color: var(--color-text); }
+.painel-vaga h3 { margin: 1.5rem 0 0.8rem; font-size: 1.1rem; }
+
+.cta-login {
+  text-align: center;
+  color: var(--color-muted);
+}
+.cta-login a { color: var(--color-accent-light); font-weight: 600; }
+
+.painel-vaga form label {
+  display: block;
+  margin: 0.9rem 0 0.3rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.painel-vaga form input,
+.painel-vaga form textarea {
+  width: 100%;
+  background: var(--color-bg);
+  border: 1px solid #2d333b;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+}
+.painel-vaga form input:focus,
+.painel-vaga form textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.painel-vaga .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+.painel-vaga .checkbox-label input { width: auto; }
+
+.painel-vaga .salario-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ======= BOTÕES ======= */
+.btn-detalhes,
+.painel-vaga button[type="submit"] {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-detalhes:hover,
+.painel-vaga button[type="submit"]:hover {
+  background: var(--color-accent-light);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--color-accent-light);
+  border: 1px solid var(--color-accent);
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  margin-left: 0.6rem;
+  text-decoration: none;
+}
+.btn-secondary:hover { background: var(--color-accent); color: #fff; }
+
+/* ======= MINHAS VAGAS (lista dentro do painel) ======= */
+.minhas-vagas {
+  list-style: none;
+  margin-top: 0.5rem;
+}
+.minhas-vagas li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #21262d;
+  font-size: 0.95rem;
+}
+.minhas-vagas .muted { color: var(--color-muted); }
+
+.mini-card-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+.mini-card-actions button {
+  background: transparent;
+  border: 1px solid #2d333b;
+  color: var(--color-muted);
+  border-radius: 6px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.8rem;
+  font-family: var(--font-main);
+  cursor: pointer;
+}
+.mini-card-actions button:hover { border-color: var(--color-accent); color: var(--color-accent-light); }
+
+.empty-state { text-align: center; color: var(--color-muted); padding: 1.5rem 0; }
+
+/* ======= LISTA DE EMPRESAS (cards de vitrine) ======= */
+.empresa-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-empresa {
+  background: var(--color-surface);
+  border: 1px solid #21262d;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.card-empresa:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.logo-container {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid #2d333b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  font-size: 1.6rem;
+}
+/* Emoji de fallback, sempre presente atrás da imagem.
+   Se a imagem carregar, ela cobre o emoji; se falhar e for
+   escondida via onerror no HTML, o emoji aparece sozinho. */
+.logo-container::before {
+  content: '🏢';
+}
+.logo-container .logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.nome-empresa {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+  color: var(--color-text);
+}
+
+.resumo-empresa {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-bottom: 1.2rem;
+  min-height: 4.5em;
+}
+.resumo-empresa strong { color: var(--color-text); }
+
+/* ======= FOOTER ======= */
+footer {
+  background: var(--color-surface);
+  border-top: 1px solid #21262d;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+.footer-links {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.footer-links a { color: var(--color-muted); }
+.footer-links a:hover { color: var(--color-accent-light); }
+
+/* ======= RESPONSIVO ======= */
+@media (max-width: 768px) {
+  header .navbar { flex-direction: column; align-items: flex-start; }
+  header nav { gap: 1rem; }
+  .painel-vaga .salario-row { grid-template-columns: 1fr; }
+}

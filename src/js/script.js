@@ -1,21 +1,6 @@
 // ===== MENU MOBILE =====
-const toggle = document.getElementById('menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-if (toggle && navLinks) {
-  toggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    toggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
-  });
-
-  // Fecha o menu ao clicar em qualquer link de navegação
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
+// Movido pra menu.js, compartilhado com as outras páginas do site.
+// index.html agora carrega menu.js ANTES deste arquivo.
 
 // ===== HERO IMAGE FLUID MOTION =====
 const heroImg = document.querySelector('.hero-image img');

@@ -1,11 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meu Perfil | DevNexus</title>
+    <link rel="stylesheet" href="../style/perfil.css">
 </head>
 <body>
-    
+
+  <!-- Navegação -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="/src/assets/dn.png" alt="Logo DevStar">
+      <h1>DevNexus</h1>
+    </div>
+
+    <nav class="nav-links">
+      <a href="/index.html">Inicio</a>
+      <a href="/src/components/sobre.html">Sobre</a>
+      <a href="/src/components/projetos.html">Projetos</a>
+      <a href="/src/components/vagas.html">Vagas</a>
+      <a href="/src/components/empresa.html">Empresa</a>
+      <button id="btn-sair" class="btn-sair" style="display:none;">Sair</button>
+    </nav>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+      ☰
+    </button>
+  </header>
+
+  <main class="perfil-container">
+
+    <!-- Ninguém logado -->
+    <section id="estado-vazio" class="estado-vazio" style="display:none;">
+      <h2>Você ainda não tem uma conta ativa</h2>
+      <p>Crie seu cadastro para montar seu perfil e publicar projetos ou vagas.</p>
+      <a href="cadastro.html" class="btn-primary">Criar conta</a>
+    </section>
+
+    <!-- Perfil de DEV -->
+    <section id="perfil-dev" class="perfil-dev" style="display:none;">
+      <div class="perfil-header">
+        <h2 id="perfil-nome"></h2>
+        <p id="perfil-headline" class="headline"></p>
+        <span id="perfil-senioridade" class="badge-senioridade"></span>
+        <div id="perfil-stacks" class="tags"></div>
+      </div>
+
+      <div class="painel">
+        <h3>Publicar um novo projeto</h3>
+        <form id="form-projeto">
+          <label for="p-titulo">Título do projeto</label>
+          <input type="text" id="p-titulo" placeholder="Ex: Sistema de Delivery" required>
+
+          <label for="p-descricao">Descrição</label>
+          <textarea id="p-descricao" rows="3" placeholder="O que o projeto faz?" required></textarea>
+
+          <label for="p-link">Link do projeto (opcional)</label>
+          <input type="url" id="p-link" placeholder="https://github.com/seu-usuario/projeto">
+
+          <label for="p-tecnologias">Tecnologias (separadas por vírgula)</label>
+          <input type="text" id="p-tecnologias" placeholder="React, Node.js, MongoDB">
+
+          <label for="p-participantes">Nº de participantes</label>
+          <input type="number" id="p-participantes" min="1" value="1">
+
+          <label for="p-imagem">URL de uma imagem (opcional)</label>
+          <input type="url" id="p-imagem" placeholder="https://...">
+
+          <button type="submit" class="btn-primary">Publicar projeto</button>
+        </form>
+      </div>
+
+      <div class="painel">
+        <h3>Meus projetos</h3>
+        <div id="meus-projetos" class="meus-projetos"></div>
+      </div>
+    </section>
+
+    <!-- Perfil de EMPRESA -->
+    <section id="perfil-empresa" class="perfil-empresa" style="display:none;">
+      <div class="perfil-header">
+        <h2 id="perfil-empresa-nome"></h2>
+        <p id="perfil-empresa-segmento" class="headline"></p>
+      </div>
+
+      <div class="painel">
+        <h3>Minhas vagas</h3>
+        <ul id="minhas-vagas-perfil" class="minhas-vagas"></ul>
+        <a href="empresa.html" class="btn-secondary">Publicar nova vaga</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/perfil.js"></script>
 </body>
 </html>

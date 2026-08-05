@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | DevNexus</title>
+    <link rel="stylesheet" href="../style/perfil.css">
+</head>
+<body>
+
+  <!-- Navegação -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="/src/assets/dn.png" alt="Logo DevStar">
+      <h1>DevNexus</h1>
+    </div>
+
+    <nav class="nav-links">
+      <a href="/index.html">Inicio</a>
+      <a href="/src/components/vagas.html">Vagas</a>
+      <a href="/src/components/projetos.html">Projetos</a>
+      <a href="/src/components/cadastro.html">Cadastrar</a>
+    </nav>
+
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+      ☰
+    </button>
+  </header>
+
+  <main class="perfil-container">
+    <section class="painel login-card">
+      <h2>Entrar</h2>
+      <p class="headline">Acesse sua conta pra ver seu perfil, publicar projetos ou vagas.</p>
+
+      <form id="form-login">
+        <label for="login-identificador">E-mail ou username</label>
+        <input type="text" id="login-identificador" placeholder="voce@email.com ou @seu-usuario" required autofocus>
+
+        <button type="submit" class="btn-primary">Entrar</button>
+      </form>
+
+      <p id="login-erro" class="empty-state" style="display:none;">
+        Não encontramos nenhuma conta com esse e-mail/username. <a href="cadastro.html">Cadastre-se</a>.
+      </p>
+    </section>
+  </main>
+
+  <script src="../js/db.js"></script>
+  <script src="../js/menu.js"></script>
+  <script src="../js/login.js"></script>
+</body>
+</html>

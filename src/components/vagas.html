@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Vagas | DevNexus</title>
     <link rel="stylesheet" href="../style/vaga.css">
+    <link rel="stylesheet" href="../style/vaga-extra.css">
 </head>
 <body>
 
-      <!-- Navegação -->
+  <!-- Navegação -->
   <header class="navbar">
     <div class="logo">
       <img src="/src/assets/dn.png" alt="Logo DevStar">
@@ -20,6 +21,7 @@
       <a href="/src/components/sobre.html">Sobre</a>
       <a href="/src/components/projetos.html">Projetos</a>
       <a href="/src/components/empresa.html">Empresa</a>
+      <a href="/src/components/login.html">Entrar</a>
       <a href="/src/components/perfil.html" class="perfil-link">Perfil</a>
     </nav>
 
@@ -28,30 +30,15 @@
     </button>
   </header>
 
-  <!-- Hero Section -->
-
-    <div class="job-card">
-    <div class="job-header">
-        <div>
-            <h3>Desenvolvedor Front-End</h3>
-            <span class="company">Tech Solutions</span>
-        </div>
-        <span class="badge remote">Remoto</span>
+  <!-- Lista de vagas: preenchida dinamicamente pelo vaga.js -->
+  <main class="vagas-container">
+    <div id="lista-vagas" class="vagas-lista">
+      <!-- os cards de vaga entram aqui via JS -->
     </div>
+  </main>
 
-    <p class="description">
-        Procuramos desenvolvedor com experiência em HTML, CSS, JavaScript e React.
-    </p>
-
-    <div class="job-info">
-        <span>📍 Natal/RN</span>
-        <span>💰 R$ 4.500 - R$ 6.000</span>
-    </div>
-
-    <button class="apply-btn">Candidatar-se</button>
-
-
-    <script src="src/js/vaga.js"></script>
-</div>
+  <script src="../js/db.js"></script>
+  <script src="../js/menu.js"></script>
+  <script src="../js/vaga.js"></script>
 </body>
 </html>

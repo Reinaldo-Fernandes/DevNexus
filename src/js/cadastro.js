@@ -20,48 +20,8 @@ const $ = id => document.getElementById(id);
 const showErr = (id, v) => { $(id).style.display = v ? 'flex' : 'none'; };
 const sanitize = v => v.replace(/<[^>]*>/g,'').trim();
 
-/* ──────────────────────────────────────
-   ARMAZENAMENTO (localStorage)
-   Chaves usadas em todo o site:
-   - devnexus_perfis  → lista com todos os perfis (empresa + dev)
-   - devnexus_sessao  → objeto único: quem está logado agora
-────────────────────────────────────── */
-const DB_PERFIS  = 'devnexus_perfis';
-const DB_SESSAO  = 'devnexus_sessao';
-
-function gerarId() {
-  return (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2));
-}
-
-function getPerfis() {
-  try {
-    return JSON.parse(localStorage.getItem(DB_PERFIS)) || [];
-  } catch (e) {
-    console.error('Não foi possível ler os perfis salvos:', e);
-    return [];
-  }
-}
-
-function salvarPerfil(perfil) {
-  const perfis = getPerfis();
-  perfis.push(perfil);
-  try {
-    localStorage.setItem(DB_PERFIS, JSON.stringify(perfis));
-    return true;
-  } catch (e) {
-    console.error('Não foi possível salvar o perfil:', e);
-    return false;
-  }
-}
-
-function iniciarSessao(perfil) {
-  const sessao = { id: perfil.id, tipo: perfil.tipo, nome: perfil.nome };
-  try {
-    localStorage.setItem(DB_SESSAO, JSON.stringify(sessao));
-  } catch (e) {
-    console.error('Não foi possível iniciar a sessão:', e);
-  }
-}
+/* gerarId, getPerfis, salvarPerfil, iniciarSessao agora moram
+   em db.js — que precisa ser carregado ANTES deste arquivo. */
 
 /* ──────────────────────────────────────
    MODE TOGGLE
@@ -184,7 +144,11 @@ function eValidate(n) {
   let ok = true;
   if(n===1) {
     if(!sanitize($('e-razao').value)) { showErr('err-e-razao',true); ok=false; } else showErr('err-e-razao',false);
-    if(!validaCNPJ($('e-cnpj').value)) { showErr('err-e-cnpj',true); ok=false; } else showErr('err-e-cnpj',false);
+    if(!validaCNPJ($('e-cnpj').value)) { showErr('err-e-cnpj',true); ok=false; }
+    else {
+      showErr('err-e-cnpj',false);
+      if(cnpjJaCadastrado($('e-cnpj').value)) { alert('Já existe uma empresa cadastrada com esse CNPJ.'); ok=false; }
+    }
     if(!$('e-seg').value) { showErr('err-e-seg',true); ok=false; } else showErr('err-e-seg',false);
     if($('e-tel').value.replace(/\D/g,'').length < 10) { showErr('err-e-tel',true); ok=false; } else showErr('err-e-tel',false);
     const site=$('e-site').value;
@@ -192,7 +156,11 @@ function eValidate(n) {
   }
   if(n===2) {
     if(!sanitize($('e-nome').value)) { showErr('err-e-nome',true); ok=false; } else showErr('err-e-nome',false);
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('e-email').value)) { showErr('err-e-email',true); ok=false; } else showErr('err-e-email',false);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('e-email').value)) { showErr('err-e-email',true); ok=false; }
+    else {
+      showErr('err-e-email',false);
+      if(emailJaCadastrado($('e-email').value)) { alert('Já existe uma conta com esse e-mail.'); ok=false; }
+    }
     const s=$('e-senha').value;
     if(!(s.length>=12&&/[A-Z]/.test(s)&&/[0-9]/.test(s)&&/[^A-Za-z0-9]/.test(s))) { showErr('err-e-senha',true); ok=false; } else showErr('err-e-senha',false);
     if($('e-conf').value !== s) { showErr('err-e-conf',true); ok=false; } else showErr('err-e-conf',false);
@@ -282,8 +250,19 @@ function checkUsername(el) {
   clearTimeout(userTimer);
   showErr('err-d-user',false); showErr('ok-d-user',false);
   if(!el.value) return;
-  if(!/^[a-zA-Z0-9_]{3,30}$/.test(el.value)) { showErr('err-d-user',true); return; }
-  userTimer = setTimeout(()=>{ showErr('ok-d-user',true); }, 500);
+  if(!/^[a-zA-Z0-9_]{3,30}$/.test(el.value)) {
+    $('err-d-user').textContent = '⚠ 3–30 chars, letras/números/_';
+    showErr('err-d-user',true);
+    return;
+  }
+  userTimer = setTimeout(()=>{
+    if (usernameJaCadastrado(el.value)) {
+      $('err-d-user').textContent = '⚠ Esse username já está em uso';
+      showErr('err-d-user', true);
+    } else {
+      showErr('ok-d-user', true);
+    }
+  }, 500);
 }
 
 function checkGitHub(el) {
@@ -307,12 +286,20 @@ function dValidate(n) {
   if(n===1) {
     if(!sanitize($('d-nome').value)) { showErr('err-d-nome',true); ok=false; } else showErr('err-d-nome',false);
     if(!/^[a-zA-Z0-9_]{3,30}$/.test($('d-user').value)) { showErr('err-d-user',true); ok=false; }
+    else if(usernameJaCadastrado($('d-user').value)) {
+      $('err-d-user').textContent = '⚠ Esse username já está em uso';
+      showErr('err-d-user',true); ok=false;
+    }
     if(!sanitize($('d-headline').value)) { showErr('err-d-headline',true); ok=false; } else showErr('err-d-headline',false);
     if(!document.querySelector('input[name="seniority"]:checked')) { showErr('err-d-sen',true); ok=false; } else showErr('err-d-sen',false);
     if(tags.length===0) { showErr('err-d-tags',true); ok=false; } else showErr('err-d-tags',false);
   }
   if(n===2) {
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('d-email').value)) { showErr('err-d-email',true); ok=false; } else showErr('err-d-email',false);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('d-email').value)) { showErr('err-d-email',true); ok=false; }
+    else {
+      showErr('err-d-email',false);
+      if(emailJaCadastrado($('d-email').value)) { alert('Já existe uma conta com esse e-mail.'); ok=false; }
+    }
   }
   if(n===3) {
     const s=$('d-senha').value;
