@@ -75,6 +75,22 @@ header.navbar {
 .perfil-header h2 { font-size: 1.6rem; margin-bottom: 0.3rem; }
 .headline { color: var(--color-muted); margin-bottom: 0.6rem; }
 
+.perfil-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+.perfil-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
 .badge-senioridade {
   display: inline-block;
   background: rgba(59,130,246,0.15);
@@ -181,5 +197,18 @@ form textarea:focus {
 .login-card form { text-align: left; }
 
 @media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--color-surface);
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 200px;
+    border-left: 1px solid #21262d;
+    padding: 1rem;
+    z-index: 100;
+  }
+  .nav-links.active { display: flex; }
   .menu-toggle { display: block; }
 }

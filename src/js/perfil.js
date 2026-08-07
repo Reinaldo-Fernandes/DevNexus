@@ -36,9 +36,23 @@ function carregarPerfilDev() {
   if (!perfil) return;
   document.getElementById('perfil-nome').textContent = perfil.nome;
   document.getElementById('perfil-headline').textContent = perfil.headline;
-  document.getElementById('perfil-senioridade').textContent = perfil.senioridade;
+  document.getElementById('perfil-senioridade').textContent = formatarSenioridade(perfil.senioridade);
   document.getElementById('perfil-stacks').innerHTML =
     perfil.stacks.map(s => `<span>${s}</span>`).join('');
+
+  const avatarEl = document.getElementById('perfil-avatar');
+  if (perfil.avatar) {
+    avatarEl.innerHTML = `<img src="${perfil.avatar}" alt="Avatar de ${perfil.nome}">`;
+  } else {
+    // sem foto salva: mostra a inicial do nome como fallback
+    avatarEl.textContent = (perfil.nome || '?').trim().charAt(0).toUpperCase();
+  }
+}
+
+/* Traduz o value do radio (junior/pleno/senior) pro texto exibido */
+function formatarSenioridade(valor) {
+  const mapa = { junior: 'Junior', pleno: 'Pleno', senior: 'Sênior' };
+  return mapa[valor] || valor || '';
 }
 
 function renderizarMeusProjetos() {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre | DevNexus</title>
+  <title>Privacidade | DevNexus</title>
   <link rel="stylesheet" href="../style/style.css">
   <link rel="stylesheet" href="../style/static.css">
 </head>
@@ -25,26 +25,32 @@
   </header>
 
   <main class="static-container">
-    <h2>Sobre o DevNexus</h2>
+    <h2>Política de Privacidade</h2>
     <p>
-      O DevNexus é uma plataforma pensada pra aproximar jovens desenvolvedores
-      de empresas em busca de novos talentos. Programadores em início de carreira
-      costumam ter dificuldade pra validar o que sabem e conseguir sua primeira
-      oportunidade — e empresas, do outro lado, procuram gente proativa, com
-      projetos práticos na mão, mas esbarram nos processos seletivos tradicionais.
-    </p>
-    <p>
-      Nossa proposta é um ambiente centralizado: devs mostram portfólios e
-      projetos reais, e recrutadores encontram talentos com base em habilidades
-      práticas e feedback transparente — sem depender só de currículo.
+      Esta é uma versão simplificada, pensada pro estágio atual do projeto
+      (protótipo, sem servidor próprio).
     </p>
 
-    <h3>Como funciona</h3>
+    <h3>Onde seus dados ficam</h3>
+    <p>
+      Hoje o DevNexus guarda cadastro, projetos e vagas publicadas diretamente
+      no navegador de quem está usando (via <code>localStorage</code>) — não
+      existe um servidor central recebendo ou armazenando esses dados ainda.
+      Isso significa que os dados ficam só nesse navegador/dispositivo e podem
+      ser apagados a qualquer momento limpando os dados do site.
+    </p>
+
+    <h3>O que isso muda pra você</h3>
     <ul>
-      <li>Devs criam um perfil e publicam projetos reais que já construíram.</li>
-      <li>Empresas publicam vagas e podem ver quem se candidatou.</li>
-      <li>Tudo fica visível publicamente — sem caixa-preta no processo.</li>
+      <li>Seus dados não são compartilhados com terceiros nem enviados pra fora do seu navegador.</li>
+      <li>Se você trocar de navegador ou dispositivo, seu cadastro não vai junto.</li>
+      <li>Não há, por enquanto, criptografia de senha real — evite usar uma senha que você usa em outros lugares.</li>
     </ul>
+
+    <p>
+      Conforme o projeto evoluir para ter um backend de verdade, esta política
+      será atualizada pra refletir onde e como os dados passam a ser armazenados.
+    </p>
   </main>
 
   <footer>

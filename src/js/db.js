@@ -162,6 +162,10 @@ function jaCandidatado(vagaId, devId) {
   return getCandidaturas().some(c => c.vagaId === vagaId && c.devId === devId);
 }
 
+function getCandidaturasPorVaga(vagaId) {
+  return getCandidaturas().filter(c => c.vagaId === vagaId);
+}
+
 function candidatar(vagaId, devId) {
   if (jaCandidatado(vagaId, devId)) return false; // evita duplicar a mesma candidatura
   const lista = getCandidaturas();
@@ -185,4 +189,13 @@ function solicitarParticipacao(projetoId, devId) {
   const lista = getParticipacoes();
   lista.push({ id: gerarId(), projetoId, devId, criadoEm: new Date().toISOString() });
   return salvarLista(DB_PARTICIPACOES, lista);
+}
+
+/* ── mensagens de contato ────────────────────────────────── */
+const DB_MENSAGENS = 'devnexus_mensagens';
+
+function salvarMensagemContato(mensagem) {
+  const lista = lerLista(DB_MENSAGENS);
+  lista.push({ id: gerarId(), ...mensagem, criadoEm: new Date().toISOString() });
+  return salvarLista(DB_MENSAGENS, lista);
 }

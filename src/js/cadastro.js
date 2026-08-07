@@ -269,13 +269,18 @@ function checkGitHub(el) {
   $('ghBadge').classList.toggle('show', /^https:\/\/(www\.)?github\.com\/[A-Za-z0-9_.-]+\/?$/.test(el.value));
 }
 
+let avatarDataUrl = null; // guarda a imagem em base64 até o momento do dSubmit()
+
 function previewAvatar(input) {
   const file = input.files[0];
   if(!file) return;
   if(!['image/png','image/jpeg','image/webp'].includes(file.type)) { alert('Formato inválido.'); return; }
   if(file.size > 2*1024*1024) { alert('Máximo 2 MB.'); return; }
   const r = new FileReader();
-  r.onload = e => { $('d-avatarPreview').innerHTML = `<img src="${e.target.result}" alt="Avatar" />`; };
+  r.onload = e => {
+    avatarDataUrl = e.target.result;
+    $('d-avatarPreview').innerHTML = `<img src="${e.target.result}" alt="Avatar" />`;
+  };
   r.readAsDataURL(file);
 }
 
@@ -334,6 +339,7 @@ function dSubmit() {
     username: username,
     headline: sanitize($('d-headline').value),
     senioridade: seniorEl ? seniorEl.value : '',
+    avatar: avatarDataUrl,
     stacks: tags.slice(),
     email: $('d-email').value,
     criadoEm: new Date().toISOString()

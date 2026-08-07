@@ -11,16 +11,16 @@
   <!-- Navegação -->
   <header class="navbar">
     <div class="logo">
-      <img src="../assets/dn.png" alt="Logo DevStar">
+      <img src="/src/assets/dn.png" alt="Logo DevStar">
       <h1>DevNexus</h1>
     </div>
 
     <nav class="nav-links">
-      <a href="../index.html">Inicio</a>
-      <a href="../components/sobre.html">Sobre</a>
-      <a href="../components/projetos.html">Projetos</a>
-      <a href="../components/vagas.html">Vagas</a>
-      <a href="../components/empresa.html">Empresa</a>
+      <a href="/index.html">Inicio</a>
+      <a href="/src/components/sobre.html">Sobre</a>
+      <a href="/src/components/projetos.html">Projetos</a>
+      <a href="/src/components/vagas.html">Vagas</a>
+      <a href="/src/components/empresa.html">Empresa</a>
       <button id="btn-sair" class="btn-sair" style="display:none;">Sair</button>
     </nav>
 
@@ -36,11 +36,13 @@
       <h2>Você ainda não tem uma conta ativa</h2>
       <p>Crie seu cadastro para montar seu perfil e publicar projetos ou vagas.</p>
       <a href="cadastro.html" class="btn-primary">Criar conta</a>
+      <p style="margin-top:1rem;"><a href="login.html">Já tem conta? Entrar</a></p>
     </section>
 
     <!-- Perfil de DEV -->
     <section id="perfil-dev" class="perfil-dev" style="display:none;">
       <div class="perfil-header">
+        <div id="perfil-avatar" class="perfil-avatar"></div>
         <h2 id="perfil-nome"></h2>
         <p id="perfil-headline" class="headline"></p>
         <span id="perfil-senioridade" class="badge-senioridade"></span>
@@ -48,8 +50,10 @@
       </div>
 
       <div class="painel">
-        <h3>Publicar um novo projeto</h3>
+        <h3 id="titulo-form-projeto">Publicar um novo projeto</h3>
         <form id="form-projeto">
+          <input type="hidden" id="p-editando-id" value="">
+
           <label for="p-titulo">Título do projeto</label>
           <input type="text" id="p-titulo" placeholder="Ex: Sistema de Delivery" required>
 
@@ -68,7 +72,8 @@
           <label for="p-imagem">URL de uma imagem (opcional)</label>
           <input type="url" id="p-imagem" placeholder="https://...">
 
-          <button type="submit" class="btn-primary">Publicar projeto</button>
+          <button type="submit" id="btn-salvar-projeto" class="btn-primary">Publicar projeto</button>
+          <button type="button" id="btn-cancelar-edicao-projeto" class="btn-secondary" style="display:none;">Cancelar edição</button>
         </form>
       </div>
 
@@ -88,13 +93,14 @@
       <div class="painel">
         <h3>Minhas vagas</h3>
         <ul id="minhas-vagas-perfil" class="minhas-vagas"></ul>
-        <a href="../components/empresa.html" class="btn-secondary">Publicar nova vaga</a>
+        <a href="empresa.html" class="btn-secondary">Publicar nova vaga</a>
       </div>
     </section>
 
   </main>
 
   <script src="../js/db.js"></script>
+  <script src="../js/menu.js"></script>
   <script src="../js/perfil.js"></script>
 </body>
 </html>

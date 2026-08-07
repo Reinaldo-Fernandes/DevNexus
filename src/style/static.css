@@ -1,0 +1,54 @@
+/* static.css — conteúdo de páginas simples (sobre, política, contato).
+   Usa junto com style.css, que já traz a navbar/footer/reset/variáveis. */
+
+.static-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.static-container h2 {
+  font-size: 2rem;
+  color: var(--color-accent-light);
+  margin-bottom: 1rem;
+}
+
+.static-container h3 {
+  font-size: 1.2rem;
+  margin: 1.8rem 0 0.6rem;
+}
+
+.static-container p {
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.static-container ul {
+  color: var(--color-muted);
+  margin: 0 0 1rem 1.3rem;
+}
+
+.contato-form {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.9rem;
+  max-width: 480px;
+}
+
+.contato-form label {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-bottom: -0.5rem;
+}
+
+.contato-form input,
+.contato-form textarea {
+  background: var(--color-surface);
+  border: 1px solid #2d333b;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+.contato-form input:focus,
+.contato-form textarea:focus { outline: none; border-color: var(--color-accent); }

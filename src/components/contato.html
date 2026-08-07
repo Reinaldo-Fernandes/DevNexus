@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre | DevNexus</title>
+  <title>Contato | DevNexus</title>
   <link rel="stylesheet" href="../style/style.css">
   <link rel="stylesheet" href="../style/static.css">
 </head>
@@ -25,26 +25,25 @@
   </header>
 
   <main class="static-container">
-    <h2>Sobre o DevNexus</h2>
-    <p>
-      O DevNexus é uma plataforma pensada pra aproximar jovens desenvolvedores
-      de empresas em busca de novos talentos. Programadores em início de carreira
-      costumam ter dificuldade pra validar o que sabem e conseguir sua primeira
-      oportunidade — e empresas, do outro lado, procuram gente proativa, com
-      projetos práticos na mão, mas esbarram nos processos seletivos tradicionais.
-    </p>
-    <p>
-      Nossa proposta é um ambiente centralizado: devs mostram portfólios e
-      projetos reais, e recrutadores encontram talentos com base em habilidades
-      práticas e feedback transparente — sem depender só de currículo.
-    </p>
+    <h2>Fale com a gente</h2>
+    <p>Dúvidas, sugestões ou parcerias — manda uma mensagem.</p>
 
-    <h3>Como funciona</h3>
-    <ul>
-      <li>Devs criam um perfil e publicam projetos reais que já construíram.</li>
-      <li>Empresas publicam vagas e podem ver quem se candidatou.</li>
-      <li>Tudo fica visível publicamente — sem caixa-preta no processo.</li>
-    </ul>
+    <form id="form-contato" class="contato-form">
+      <label for="c-nome">Nome</label>
+      <input type="text" id="c-nome" required>
+
+      <label for="c-email">E-mail</label>
+      <input type="email" id="c-email" required>
+
+      <label for="c-mensagem">Mensagem</label>
+      <textarea id="c-mensagem" rows="5" required></textarea>
+
+      <button type="submit" class="btn-primary" style="justify-self:start;">Enviar</button>
+    </form>
+
+    <p id="contato-sucesso" style="display:none; color: var(--color-accent-light); margin-top:1.5rem;">
+      Mensagem enviada! A gente responde o quanto antes.
+    </p>
   </main>
 
   <footer>
@@ -56,6 +55,8 @@
     </div>
   </footer>
 
+  <script src="../js/db.js"></script>
   <script src="../js/menu.js"></script>
+  <script src="../js/contato.js"></script>
 </body>
 </html>

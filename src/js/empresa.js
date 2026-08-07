@@ -22,7 +22,8 @@ function iniciarPainel() {
   }
 }
 
-/* ── Lista as vagas que ESSA empresa já publicou ─────────── */
+/* ── Lista as vagas que ESSA empresa já publicou, com os
+   candidatos reais de cada uma ─────────────────────────── */
 function renderizarMinhasVagas() {
   if (!minhasVagasEl) return;
   const vagas = getVagasPorEmpresa(sessao.id);
@@ -34,28 +35,56 @@ function renderizarMinhasVagas() {
 
   minhasVagasEl.innerHTML = '';
   vagas.slice().reverse().forEach(v => {
+    const candidaturas = getCandidaturasPorVaga(v.id);
+    const candidatos = candidaturas
+      .map(c => getPerfilPorId(c.devId))
+      .filter(Boolean); // remove caso o perfil tenha sido excluído
+
     const li = document.createElement('li');
+    li.className = 'vaga-item';
     li.dataset.id = v.id;
     li.innerHTML = `
-      <span>${v.titulo} — <span class="muted">${v.local || 'remoto'}</span></span>
-      <span class="mini-card-actions">
-        <button type="button" class="btn-editar">Editar</button>
-        <button type="button" class="btn-excluir">Excluir</button>
-      </span>
+      <div class="vaga-item-linha">
+        <span>${v.titulo} — <span class="muted">${v.local || 'remoto'}</span></span>
+        <span class="mini-card-actions">
+          <button type="button" class="btn-candidatos">
+            ${candidatos.length} candidato${candidatos.length === 1 ? '' : 's'}
+          </button>
+          <button type="button" class="btn-editar">Editar</button>
+          <button type="button" class="btn-excluir">Excluir</button>
+        </span>
+      </div>
+      <ul class="lista-candidatos" style="display:none;">
+        ${candidatos.length === 0
+          ? '<li class="empty-state">Ninguém se candidatou ainda.</li>'
+          : candidatos.map(d => `
+              <li>
+                <span>${d.nome}${d.headline ? ' — <span class="muted">' + d.headline + '</span>' : ''}</span>
+                ${d.email ? `<a href="mailto:${d.email}" class="btn-contatar">Contatar</a>` : ''}
+              </li>
+            `).join('')}
+      </ul>
     `;
     minhasVagasEl.appendChild(li);
   });
 }
 
-/* ── Delegação de evento pros botões editar/excluir ──────── */
+/* ── Delegação de evento pros botões editar/excluir/candidatos ── */
 if (minhasVagasEl) {
   minhasVagasEl.addEventListener('click', (e) => {
-    const item = e.target.closest('li');
+    const item = e.target.closest('.vaga-item');
     if (!item) return;
     const id = item.dataset.id;
 
+    if (e.target.closest('.btn-candidatos')) {
+      const lista = item.querySelector('.lista-candidatos');
+      lista.style.display = lista.style.display === 'none' ? 'block' : 'none';
+      return;
+    }
+
     if (e.target.closest('.btn-editar')) {
       entrarModoEdicaoVaga(id);
+      return;
     }
 
     if (e.target.closest('.btn-excluir')) {

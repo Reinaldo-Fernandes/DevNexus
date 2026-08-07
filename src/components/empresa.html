@@ -7,19 +7,21 @@
     <title>Empresas | DevNexus</title>
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <h1>Empresas</h1>
-            <nav>
-                <a href="../index.html">Home</a>
-                <a href="../components/sobre.html">Sobre</a>
-                <a href="../components/projetos.html">Projetos</a>
-                <a href="../components/vagas.html">Vagas</a>
-                <a href="../components/cadastro.html">Cadastro</a>
-                <a href="../components/login.html">Entrar</a>
-                <a href="../components/perfil.html" class="perfil-link">Perfil</a>
-            </nav>
+    <header class="navbar">
+        <div class="logo">
+            <img src="/src/assets/dn.png" alt="Logo DevStar">
+            <h1>DevNexus</h1>
         </div>
+        <nav class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="vagas.html">Vagas</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="login.html">Entrar</a>
+            <a href="perfil.html" class="perfil-link">Perfil</a>
+        </nav>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">☰</button>
     </header>
 
     <main class="empresa-container">
@@ -139,6 +141,7 @@
     </footer>
 
     <script src="../js/db.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/empresa.js"></script>
 </body>
 </html>

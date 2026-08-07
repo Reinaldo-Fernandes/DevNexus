@@ -25,44 +25,53 @@ body {
 a { text-decoration: none; color: var(--color-accent); transition: color 0.2s ease; }
 a:hover { color: var(--color-accent-light); }
 
-/* ======= NAVBAR ======= */
-header {
+/* ======= NAVBAR (mesmo padrão do resto do site) ======= */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: var(--color-surface);
+  padding: 1rem 2rem;
   border-bottom: 1px solid #21262d;
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-header .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-}
+.logo { display: flex; align-items: center; gap: 0.6rem; }
+.logo img { width: 35px; height: 35px; }
+.logo h1 { font-size: 1.3rem; font-weight: 700; }
 
-header .navbar h1 {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
+.nav-links { display: flex; gap: 1.5rem; }
+.nav-links a { font-weight: 500; color: var(--color-text); }
+.nav-links a:hover { color: var(--color-accent-light); }
+.nav-links a.perfil-link { color: var(--color-accent-light); }
 
-header nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.4rem;
-}
-
-header nav a {
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
   color: var(--color-text);
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1.8rem;
+  cursor: pointer;
 }
-header nav a:hover { color: var(--color-accent-light); }
-header nav a.perfil-link { color: var(--color-accent-light); }
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--color-surface);
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 200px;
+    border-left: 1px solid #21262d;
+    padding: 1rem;
+    z-index: 99;
+  }
+  .nav-links.active { display: flex; }
+  .menu-toggle { display: block; }
+}
 
 /* ======= CONTAINER PRINCIPAL ======= */
 .empresa-container {
@@ -181,16 +190,44 @@ header nav a.perfil-link { color: var(--color-accent-light); }
   list-style: none;
   margin-top: 0.5rem;
 }
-.minhas-vagas li {
+.vaga-item {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #21262d;
+}
+.vaga-item-linha {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid #21262d;
   font-size: 0.95rem;
 }
 .minhas-vagas .muted { color: var(--color-muted); }
+
+.lista-candidatos {
+  list-style: none;
+  margin: 0.8rem 0 0.3rem;
+  padding: 0.8rem;
+  background: var(--color-bg);
+  border: 1px solid #21262d;
+  border-radius: 8px;
+}
+.lista-candidatos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #21262d;
+}
+.lista-candidatos li:last-child { border-bottom: none; }
+.btn-contatar {
+  font-size: 0.8rem;
+  color: var(--color-accent-light);
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  padding: 0.15rem 0.6rem;
+}
+.btn-contatar:hover { background: var(--color-accent); color: #fff; }
 
 .mini-card-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
 .mini-card-actions button {
@@ -289,7 +326,5 @@ footer {
 
 /* ======= RESPONSIVO ======= */
 @media (max-width: 768px) {
-  header .navbar { flex-direction: column; align-items: flex-start; }
-  header nav { gap: 1rem; }
   .painel-vaga .salario-row { grid-template-columns: 1fr; }
 }
